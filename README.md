@@ -6,10 +6,12 @@ Now we're going to do some rudimentry analysis of Shakespeare's classic play: Ma
 
 ## Objectives
 You will be able to:
-* Show mastery of the content covered in this section
+* Apply string methods to make changes to a string
+* Use a `for` loop to iterate over a collection
+* Assign values in a dictionary
 
 ## Getting the Data
-Here we start by importing a Python package and using it to pull the transcript of Macbeth from the project Gutenberg website. We also preview a few details about what is now stored in the variable macbeth; it's a string with 119,846 characters, the first 500 of which are printed below. 
+Here we start by importing a Python package called `requests` and using it to pull the transcript of Macbeth from the [Project Gutenberg](https://www.gutenberg.org/) website. We'll also preview a few details about what is now stored in the variable `macbeth`. As you can see, it's a string with 119,846 characters - the first 500 of which are printed below. 
 
 
 ```python
@@ -22,19 +24,20 @@ print(macbeth[:500])
 ```
 
     <class 'str'>
-    119846
-    ﻿***The Project Gutenberg's Etext of Shakespeare's First Folio***
+    120253
+    ﻿
+    
+    ***The Project Gutenberg's Etext of Shakespeare's First Folio***
     ********************The Tragedie of Macbeth*********************
     
-    This is our 3rd edition of most of these plays.  See the index.
     
     
-    Copyright laws are changing all over the world, be sure to check
-    the copyright laws for your country before posting these files!!
-    
-    Please take a look at the important information in this header.
-    We encourage you to keep this file on your own disk, keeping an
-    electronic path open for the nex
+    *******************************************************************
+    THIS EBOOK WAS ONE OF PROJECT GUTENBERG'S EARLY FILES PRODUCED AT A
+    TIME WHEN PROOFING METHODS AND TOOLS WERE NOT WELL DEVELOPED. THERE
+    IS AN IMPROVED EDITION OF THIS TITLE WHICH MAY BE VIEWED AS EBOOK
+    (#1533) at https://www.gutenberg.org/ebooks/1533
+    *********************************
 
 
 ## Your Task
@@ -42,11 +45,12 @@ print(macbeth[:500])
 Your task is to create a bar graph of the 25 most common words in Shakespeare's Macbeth.  
 
 
-A common Python programming pattern to count objects, produce histograms, or update statistics is to make calls to a dictionary as you iterate through a list. For example, given a list of words, you can create a dictionary to store counts and then iterate through the list of words, checking how many times each word has appeared using your dictionary, and updating the dictionary count now that you've seen that word again. The `.get()` method of dictionary is very useful in doing this. Read the docstring for the `.get()` method and use it along with the pseudocode below to create a bar graph of the 25 most common words from the transcript of Macbeth which has been loaded into the variable 'macbeth'. Be sure to include a title and appropriate labels for your graph.
+A common Python programming pattern to count objects, produce histograms, or update statistics is to make calls to a dictionary as you iterate through a list. For example, given a list of words, you can create a dictionary to store counts and then iterate through the list of words, checking how many times each word has appeared using your dictionary, and updating the dictionary count now that you've seen that word again. The `.get()` dictionary method is very useful in doing this. Read the docstring for the `.get()` method and use it along with the pseudocode below to create a bar graph of the 25 most common words from the transcript of Macbeth which has been loaded into the variable 'macbeth'. Be sure to include a title and appropriate labels for your graph.
+
+To get the 25 *most common* words, you will have to sort your counts. If you are not super sure how to do this, checkout out the [Sorting HOW TO](https://docs.python.org/3/howto/sorting.html) Python documentation. Part of being a data scientist is figuring out how to do tasks that you may not have done before. Remember, in these situations, Google is your friend!
 
 
 ```python
-import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib inline
@@ -64,41 +68,27 @@ words = macbeth.split()
 word_counts = {}
 # Iterate through the text of Macbeth
 for word in words:
+    # Update word counts
     word_counts[word] = word_counts.get(word, 0) + 1 #Get previous entry, update by 1
-# Update word counts
-# Create Bar Graph
-
-#With Pandas
-counts = pd.DataFrame.from_dict(word_counts, orient='index')
-counts = counts.sort_values(by=counts.columns[0], ascending=False)
-counts.head(25).plot(kind='barh')
-plt.title('Top 25 Words from Macbeth')
-plt.ylabel('Word')
-plt.xlabel('Number of Occurences')
-# Include descriptive titles and labels
 ```
 
 
-
-
-    <matplotlib.text.Text at 0x1c03bcdc748>
-
-
-
-
-![png](index_files/index_4_1.png)
-
-
-
 ```python
-#With Lists
+# Convert to a list
 counts = list(word_counts.items())
+# Sort words by count
 top_25 = sorted(counts, key = lambda x: x[1], reverse=True)[:25]
+# Store word counts 
 y = [item[1] for item in top_25]
+# Create x-axis ticks
 X = np.arange(len(y))
+# Create figure object with size = 12x12
 plt.figure(figsize=(12,12))
+# Create Bar Graph
 plt.bar(X , y)
+# Use words as x-axis tick labels
 plt.xticks(X, [item[0] for item in top_25]);
+# Include descriptive titles and labels
 plt.ylabel('Number of Occurences')
 plt.xlabel('Word')
 plt.title('Top 25 Words in Macbeth')
@@ -107,7 +97,7 @@ plt.title('Top 25 Words in Macbeth')
 
 
 
-    <matplotlib.text.Text at 0x1c03c29eb70>
+    Text(0.5, 1.0, 'Top 25 Words in Macbeth')
 
 
 
