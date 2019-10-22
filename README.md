@@ -2,7 +2,7 @@
 # Project: Analyzing Macbeth
 
 ## Introduction
-Now we're going to do some rudimentry analysis of Shakespeare's classic play: Macbeth! You will get practice working with lists and dictionaries, condtionals, visualizing data, and thinking analytically about data.
+Now we're going to do some rudimentary analysis of Shakespeare's classic play: Macbeth! You will get practice working with lists and dictionaries, conditionals, visualizing data, and thinking analytically about data.
 
 ## Objectives
 You will be able to:
@@ -11,7 +11,7 @@ You will be able to:
 * Assign values in a dictionary
 
 ## Getting the Data
-Here we start by importing a Python package called `requests` and using it to pull the transcript of Macbeth from the [Project Gutenberg](https://www.gutenberg.org/) website. We'll also preview a few details about what is now stored in the variable `macbeth`. As you can see, it's a string with 119,846 characters - the first 500 of which are printed below. 
+Here we start by importing a Python package called `requests`. We'll use it to pull the transcript of Macbeth from the [Project Gutenberg](https://www.gutenberg.org/) website. We'll also preview a few details about what is now stored in the variable `macbeth`. As you can see, it's a string with 120,253 characters - the first 500 of which are printed below. 
 
 
 ```python
