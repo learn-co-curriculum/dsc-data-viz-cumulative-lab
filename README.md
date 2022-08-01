@@ -4,7 +4,9 @@
 You've completed the data visualization section — excellent work. Now we're going to do some rudimentary analysis of Shakespeare's classic play: Macbeth! You will get practice working with lists and dictionaries, conditionals, visualizing data, and thinking analytically about data.
 
 ## Objectives
+
 You will be able to:
+
 * Apply string methods to make changes to a string
 * Use a `for` loop to iterate over a collection
 * Assign values in a dictionary
@@ -389,7 +391,9 @@ ax.set_title("Word Frequency Distribution for Macbeth");
 ```
 
 
+    
 ![png](index_files/index_21_0.png)
+    
 
 
 
@@ -414,7 +418,9 @@ sns.histplot(
 ```
 
 
+    
 ![png](index_files/index_22_0.png)
+    
 
 
 Wow, that is a very skewed dataset! It looks like the overwhelming majority of words appear about 20 times or fewer, but we also have words (like 'the', the most common word discovered above) that appear hundreds of times. Those very frequent words are so rare that we can't even see their associated counts, the bars are so small.
@@ -543,7 +549,9 @@ ax.set_title("Top 25 Words in Macbeth");
 ```
 
 
+    
 ![png](index_files/index_28_0.png)
+    
 
 
 
@@ -574,7 +582,9 @@ sns.barplot(
 ```
 
 
+    
 ![png](index_files/index_29_0.png)
+    
 
 
 ## Level Up (Optional)
