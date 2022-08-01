@@ -4,7 +4,9 @@
 You've completed the data visualization section — excellent work. Now we're going to do some rudimentary analysis of Shakespeare's classic play: Macbeth! You will get practice working with lists and dictionaries, conditionals, visualizing data, and thinking analytically about data.
 
 ## Objectives
+
 You will be able to:
+
 * Apply string methods to make changes to a string
 * Use a `for` loop to iterate over a collection
 * Assign values in a dictionary
