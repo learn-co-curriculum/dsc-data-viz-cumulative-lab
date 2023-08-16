@@ -87,7 +87,7 @@ full_text = response.text
 
 # The beginning describes the source/copyright, it isn't the actual text
 # of the play until the 16648th character
-macbeth = full_text[16648:]
+macbeth = full_text[17473:]
 
 # Print string summary
 print("Data type:", type(macbeth))
@@ -100,9 +100,10 @@ print(macbeth[:500])
 
     Data type: <class 'str'>
     
-    Number of characters: 103605
+    Number of characters: 122550
     
     First 500 characters:
+    
     The Tragedie of Macbeth
     
     Actus Primus. Scoena Prima.
@@ -124,7 +125,7 @@ print(macbeth[:500])
        1. I come, Gray-Malkin
     
        All. Padock calls anon: faire is foule, and foule is faire,
-    Houer through the fogge 
+    Houer through the fogg
 
 
 ## Word Count Summary
@@ -142,7 +143,7 @@ print("Macbeth contains {} words".format(word_count))
 print("Here are some examples:", words_raw[11:21])
 ```
 
-    Macbeth contains 17737 words
+    Macbeth contains 20641 words
     Here are some examples: ['Enter', 'three', 'Witches.', '1.', 'When', 'shall', 'we', 'three', 'meet', 'againe?']
 
 
@@ -186,7 +187,7 @@ unique_word_count = len(set(words_cleaned))
 print("Macbeth contains {} unique words".format(unique_word_count))
 ```
 
-    Macbeth contains 3577 unique words
+    Macbeth contains 4102 unique words
 
 
 ## Frequency Table
@@ -218,7 +219,7 @@ print(len(word_counts))
 ```
 
     <class 'dict'>
-    3577
+    4102
 
 
 Now it's time to find `most_frequent_word` and `least_frequent_word`. Again, this follows the logic of the mode function from the previous lab.
@@ -257,8 +258,8 @@ print("The least frequent word in Macbeth is '{}', which appears {} times".forma
 ))
 ```
 
-    The most frequent word in Macbeth is 'the', which appears 647 times
-    The least frequent word in Macbeth is 'finis', which appears 1 times
+    The most frequent word in Macbeth is 'the', which appears 823 times
+    The least frequent word in Macbeth is 'hear', which appears 1 times
 
 
 ## Visualizations
@@ -361,9 +362,9 @@ print("Frequencies:", frequencies)
     Tick values: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
      24]
     
-    Labels: ['the', 'and', 'to', 'of', 'i', 'a', 'that', 'my', 'you', 'in', 'is', 'not', 'it', 'with', 'his', 'be', 'macb', 'your', 'our', 'haue', 'but', 'me', 'he', 'for', 'what']
+    Labels: ['the', 'and', 'to', 'of', 'i', 'a', 'you', 'in', 'that', 'my', 'is', 'with', 'not', 'it', 'be', 'his', 'this', 'macb', 'your', 'for', 'our', 'but', 'haue', 'all', 'me']
     
-    Frequencies: [647, 545, 383, 338, 331, 239, 227, 203, 203, 199, 180, 165, 161, 153, 146, 137, 137, 126, 123, 122, 120, 113, 110, 109, 106]
+    Frequencies: [823, 609, 464, 454, 331, 296, 273, 257, 242, 203, 201, 198, 192, 173, 154, 146, 146, 137, 135, 134, 127, 124, 122, 113, 113]
 
 
 Now that we have our data, let's make a bar graph. Just to keep it interesting, let's make this a ***horizontal*** **bar graph**. Horizontal bar graphs are useful when you have a lot of text labels — it avoids having to turn the labels diagonally or even sideways in order for them to fit next to each other.
