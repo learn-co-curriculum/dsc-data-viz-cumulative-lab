@@ -89,7 +89,7 @@ full_text = response.text
 
 # The beginning describes the source/copyright, it isn't the actual text
 # of the play until the 16648th character
-macbeth = full_text[16648:]
+macbeth = full_text[17473:]
 
 # Print string summary
 print("Data type:", type(macbeth))
@@ -176,7 +176,7 @@ The general algorithm for building a frequency table is:
 # Your code here
 
 print(type(word_counts)) # <class 'dict'>
-print(len(word_counts))  # 3577
+print(len(word_counts))  # 4102
 ```
 
 Now it's time to find `most_frequent_word` and `least_frequent_word`. Again, this follows the logic of the mode function from the previous lab.
