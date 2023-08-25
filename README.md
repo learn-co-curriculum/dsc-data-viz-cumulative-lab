@@ -14,7 +14,7 @@ You will be able to:
 
 ## Your Task: Analyze the Text of Shakespeare's Macbeth
 
-![cover page of macbeth](images/macbeth.jpg)
+![cover page of macbeth](https://curriculum-content.s3.amazonaws.com/data-science/images/macbeth.jpg)
 
 <span>Photo by <a href="https://unsplash.com/@voodoojava?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Matt Riches</a> on <a href="https://unsplash.com/s/photos/shakespeare?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
 
