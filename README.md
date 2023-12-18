@@ -101,8 +101,8 @@ response = requests.get('https://www.gutenberg.org/cache/epub/2264/pg2264.txt')
 full_text = response.text
 
 # The beginning describes the source/copyright, it isn't the actual text
-# of the play until the 16648th character
-macbeth = full_text[17473:]
+# of the play until the 4863rd character
+macbeth = full_text[4863:]
 
 # Print string summary
 print("Data type:", type(macbeth))
@@ -120,8 +120,8 @@ response = requests.get('https://www.gutenberg.org/cache/epub/2264/pg2264.txt')
 full_text = response.text
 
 # The beginning describes the source/copyright, it isn't the actual text
-# of the play until the 16648th character
-macbeth = full_text[17473:]
+# of the play until the 4863rd character
+macbeth = full_text[4863:]
 
 # Print string summary
 print("Data type:", type(macbeth))
