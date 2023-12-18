@@ -83,6 +83,19 @@ sns.set_style("whitegrid")
 
 
 ```python
+# __SOLUTION__ 
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import requests
+
+sns.set_context("talk")
+sns.set_style("whitegrid")
+%matplotlib inline
+```
+
+
+```python
 # Run this cell without changes
 response = requests.get('https://www.gutenberg.org/cache/epub/2264/pg2264.txt')
 full_text = response.text
@@ -100,6 +113,55 @@ print("First 500 characters:")
 print(macbeth[:500])
 ```
 
+
+```python
+# __SOLUTION__
+response = requests.get('https://www.gutenberg.org/cache/epub/2264/pg2264.txt')
+full_text = response.text
+
+# The beginning describes the source/copyright, it isn't the actual text
+# of the play until the 16648th character
+macbeth = full_text[17473:]
+
+# Print string summary
+print("Data type:", type(macbeth))
+print()
+print("Number of characters:", len(macbeth))
+print()
+print("First 500 characters:")
+print(macbeth[:500])
+```
+
+    Data type: <class 'str'>
+    
+    Number of characters: 122550
+    
+    First 500 characters:
+    
+    The Tragedie of Macbeth
+    
+    Actus Primus. Scoena Prima.
+    
+    Thunder and Lightning. Enter three Witches.
+    
+      1. When shall we three meet againe?
+    In Thunder, Lightning, or in Raine?
+      2. When the Hurley-burley's done,
+    When the Battaile's lost, and wonne
+    
+       3. That will be ere the set of Sunne
+    
+       1. Where the place?
+      2. Vpon the Heath
+    
+       3. There to meet with Macbeth
+    
+       1. I come, Gray-Malkin
+    
+       All. Padock calls anon: faire is foule, and foule is faire,
+    Houer through the fogg
+
+
 ## Word Count Summary
 
 Create a variable `word_count` that is an integer representing the total count of words in `macbeth`. In order to do this, first create a variable `words_raw` that is a list containing all words in the string.
@@ -115,6 +177,20 @@ word_count = None
 print("Macbeth contains {} words".format(word_count))
 print("Here are some examples:", words_raw[11:21])
 ```
+
+
+```python
+# __SOLUTION__
+words_raw = macbeth.split()
+word_count = len(words_raw)
+
+print("Macbeth contains {} words".format(word_count))
+print("Here are some examples:", words_raw[11:21])
+```
+
+    Macbeth contains 20641 words
+    Here are some examples: ['Enter', 'three', 'Witches.', '1.', 'When', 'shall', 'we', 'three', 'meet', 'againe?']
+
 
 ## Unique Word Count
 
@@ -151,11 +227,46 @@ print("Cleaned word examples:", words_cleaned[11:21])
 
 
 ```python
+# __SOLUTION__
+import string
+punctuation = string.punctuation
+
+words_cleaned = []
+
+for word in words_raw:
+    # Remove punctuation
+    word = word.strip(punctuation)
+    # Make lowercase
+    word = word.lower()
+    # Append to words_cleaned
+    words_cleaned.append(word)
+
+print("Cleaned word examples:", words_cleaned[11:21])
+```
+
+    Cleaned word examples: ['enter', 'three', 'witches', '1', 'when', 'shall', 'we', 'three', 'meet', 'againe']
+
+
+
+```python
 # Replace None with appropriate code
 unique_word_count = None
 
 print("Macbeth contains {} unique words".format(unique_word_count))
 ```
+
+
+```python
+# __SOLUTION__
+
+# Use set() to only include unique words
+unique_word_count = len(set(words_cleaned))
+
+print("Macbeth contains {} unique words".format(unique_word_count))
+```
+
+    Macbeth contains 4102 unique words
+
 
 ## Frequency Table
 
@@ -178,6 +289,25 @@ The general algorithm for building a frequency table is:
 print(type(word_counts)) # <class 'dict'>
 print(len(word_counts))  # 4102
 ```
+
+
+```python
+# __SOLUTION__
+word_counts = {}
+
+for word in words_cleaned:
+    if word not in word_counts:
+        word_counts[word] = 1
+    else:
+        word_counts[word] += 1
+
+print(type(word_counts))
+print(len(word_counts))
+```
+
+    <class 'dict'>
+    4102
+
 
 Now it's time to find `most_frequent_word` and `least_frequent_word`. Again, this follows the logic of the mode function from the previous lab.
 
@@ -205,6 +335,33 @@ print("The least frequent word in Macbeth is '{}', which appears {} times".forma
 ))
 ```
 
+
+```python
+# __SOLUTION__
+max_frequency = max(word_counts.values())
+min_frequency = min(word_counts.values())
+
+most_frequent_word = None
+least_frequent_word = None
+
+for word, frequency in word_counts.items():
+    if frequency == max_frequency:
+        most_frequent_word = word
+    elif frequency == min_frequency:
+        least_frequent_word = word
+
+print("The most frequent word in Macbeth is '{}', which appears {} times".format(
+    most_frequent_word, word_counts[most_frequent_word]
+))
+print("The least frequent word in Macbeth is '{}', which appears {} times".format(
+    least_frequent_word, word_counts[least_frequent_word]
+))
+```
+
+    The most frequent word in Macbeth is 'the', which appears 823 times
+    The least frequent word in Macbeth is 'hear', which appears 1 times
+
+
 ## Visualizations
 
 ### Histogram
@@ -221,6 +378,51 @@ Details:
 ```python
 # Your code here
 ```
+
+
+```python
+# __SOLUTION__
+
+# Matplotlib version
+fig, ax = plt.subplots(figsize=(15,5))
+ax.hist(word_counts.values(), bins=100)
+ax.set_xlabel("Word Frequency")
+ax.set_ylabel("Number of Words with This Frequency")
+ax.set_title("Word Frequency Distribution for Macbeth");
+```
+
+
+    
+![png](index_files/index_21_0.png)
+    
+
+
+
+```python
+# __SOLUTION__
+
+# Technically you can use Seaborn also but it requires making
+# the figure and axes in Matplotlib first, otherwise you don't
+# see any data drawn with the default width
+
+fig, ax = plt.subplots(figsize=(15,5))
+sns.histplot(
+    word_counts.values(),
+    bins=100,
+    ax=ax, # telling it to plot using the axes already created  
+    legend=False # seaborn has a legend by default but I don't think it's useful here
+).set(
+    xlabel="Word Frequency", 
+    ylabel="Number of Words with This Frequency", 
+    title="Word Frequency Distribution for Macbeth"
+);
+```
+
+
+    
+![png](index_files/index_22_0.png)
+    
+
 
 Wow, that is a very skewed dataset! It looks like the overwhelming majority of words appear about 20 times or fewer, but we also have words (like 'the', the most common word discovered above) that appear hundreds of times. Those very frequent words are so rare that we can't even see their associated counts, the bars are so small.
 
@@ -261,6 +463,49 @@ print()
 print("Frequencies:", frequencies)
 ```
 
+
+```python
+# __SOLUTION__
+
+counts_list = list(word_counts.items())
+
+# Sort the list of tuples by the frequency (second element in each tuple)
+# Make sure it goes from most to least frequent
+counts_list_sorted = sorted(counts_list, key = lambda item: item[1], reverse=True)
+
+# Slice the sorted list to just the first 25 tuples
+top_25 = counts_list_sorted[:25]
+
+# Make a list of dummy numbers to populate the axis
+ticks = np.arange(25)
+
+# Get just the words from top_25 and assign to labels
+# Get just the frequencies from top_25 and assign to frequencies
+labels = []
+frequencies = []
+for word, frequency in top_25:
+    labels.append(word)
+    frequencies.append(frequency)
+    
+# ^ Alternatively you could use list comprehension:
+# labels = [item[0] for item in top_25]
+# frequencies = [item[1] for item in top_25]
+
+print("Tick values:", ticks)
+print()
+print("Labels:", labels)
+print()
+print("Frequencies:", frequencies)
+```
+
+    Tick values: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+     24]
+    
+    Labels: ['the', 'and', 'to', 'of', 'i', 'a', 'you', 'in', 'that', 'my', 'is', 'with', 'not', 'it', 'be', 'his', 'this', 'macb', 'your', 'for', 'our', 'but', 'haue', 'all', 'me']
+    
+    Frequencies: [823, 609, 464, 454, 331, 296, 273, 257, 242, 203, 201, 198, 192, 173, 154, 146, 146, 137, 135, 134, 127, 124, 122, 113, 113]
+
+
 Now that we have our data, let's make a bar graph. Just to keep it interesting, let's make this a ***horizontal*** **bar graph**. Horizontal bar graphs are useful when you have a lot of text labels — it avoids having to turn the labels diagonally or even sideways in order for them to fit next to each other.
 
 **Matplotlib:** In a horizontal bar graph with Matplotlib, `y` is where you pass in the dummy tick values, and `width` is where you pass in the frequencies (vs. `x` and `height` in a standard bar chart). Full documentation for `.barh()`, the horizontal bar chart method, [here](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.barh.html#matplotlib.axes.Axes.barh).
@@ -277,6 +522,71 @@ Details:
 ```python
 # Your code here
 ```
+
+
+```python
+# __SOLUTION__
+
+# Matplotlib version
+
+# You don't have to reverse the order, I just think it looks better
+# for the largest to be at the top rather than closest to the x-axis
+# (the default behavior)
+frequencies_reversed = frequencies[::-1]
+labels_reversed = labels[::-1]
+
+fig, ax = plt.subplots(figsize=(6, 12))
+ax.barh(ticks, frequencies_reversed)
+
+# You have to set both the ticks themselves and the labels
+# The ticks make it so there are fully 25 ticks, not just 6
+ax.set_yticks(ticks)
+# The labels put the words next to the tick marks
+ax.set_yticklabels(labels_reversed)
+
+ax.set_ylabel("Word")
+ax.set_xlabel("Number of Occurrences")
+ax.set_title("Top 25 Words in Macbeth");
+```
+
+
+    
+![png](index_files/index_28_0.png)
+    
+
+
+
+```python
+# __SOLUTION__
+
+# Seaborn version
+
+# Seaborn automatically puts the largest at the top, so you
+# don't need to create reversed versions
+
+# Text overlaps if you use the default width, so start with
+# Matplotlib fig and ax
+fig, ax = plt.subplots(figsize=(6, 12))
+
+sns.barplot(
+    x=frequencies, 
+    y=ticks, 
+    orient="h",
+    ax=ax, # telling it to plot using the axes already created  
+    palette="flare" # set a sequential colormap
+).set(
+    yticklabels=labels,
+    ylabel="Word",
+    xlabel="Number of Occurrences", 
+    title="Top 25 Words in Macbeth"
+);
+```
+
+
+    
+![png](index_files/index_29_0.png)
+    
+
 
 ## Level Up (Optional)
 This cumulative lab should take you about an hour and a half to complete. If you're done much more quickly than that and are not behind in the course, feel free to deepen your knowledge by completing any or all of the following tasks until you run out of time (creating a relevant visualization for each):
