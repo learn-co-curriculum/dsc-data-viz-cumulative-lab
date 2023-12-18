@@ -70,6 +70,7 @@ We'll use it to pull the transcript of Macbeth from the Project Gutenberg websit
 
 
 ```python
+# Run this cell without changes
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -82,6 +83,39 @@ sns.set_style("whitegrid")
 
 
 ```python
+# __SOLUTION__ 
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import requests
+
+sns.set_context("talk")
+sns.set_style("whitegrid")
+%matplotlib inline
+```
+
+
+```python
+# Run this cell without changes
+response = requests.get('https://www.gutenberg.org/cache/epub/2264/pg2264.txt')
+full_text = response.text
+
+# The beginning describes the source/copyright, it isn't the actual text
+# of the play until the 16648th character
+macbeth = full_text[17473:]
+
+# Print string summary
+print("Data type:", type(macbeth))
+print()
+print("Number of characters:", len(macbeth))
+print()
+print("First 500 characters:")
+print(macbeth[:500])
+```
+
+
+```python
+# __SOLUTION__
 response = requests.get('https://www.gutenberg.org/cache/epub/2264/pg2264.txt')
 full_text = response.text
 
@@ -136,6 +170,17 @@ Hint: look at the `.split()` string method ([documentation here](https://docs.py
 
 
 ```python
+# Replace None with appropriate code
+words_raw = None
+word_count = None
+
+print("Macbeth contains {} words".format(word_count))
+print("Here are some examples:", words_raw[11:21])
+```
+
+
+```python
+# __SOLUTION__
 words_raw = macbeth.split()
 word_count = len(words_raw)
 
@@ -159,6 +204,30 @@ Hint: look at the `.strip()` string method ([documentation here](https://docs.py
 
 
 ```python
+# Replace None with appropriate code
+
+# You can use this punctuation string for defining what characters to remove
+import string
+punctuation = string.punctuation
+
+words_cleaned = []
+
+for word in words_raw:
+    # Remove punctuation
+    None
+    # Make lowercase
+    None
+    # Append to words_cleaned
+    None
+
+# Use this print statement to double-check that everything
+# is lowercase and has punctuation removed
+print("Cleaned word examples:", words_cleaned[11:21])
+```
+
+
+```python
+# __SOLUTION__
 import string
 punctuation = string.punctuation
 
@@ -180,6 +249,15 @@ print("Cleaned word examples:", words_cleaned[11:21])
 
 
 ```python
+# Replace None with appropriate code
+unique_word_count = None
+
+print("Macbeth contains {} unique words".format(unique_word_count))
+```
+
+
+```python
+# __SOLUTION__
 
 # Use set() to only include unique words
 unique_word_count = len(set(words_cleaned))
@@ -206,6 +284,15 @@ The general algorithm for building a frequency table is:
 
 
 ```python
+# Your code here
+
+print(type(word_counts)) # <class 'dict'>
+print(len(word_counts))  # 4102
+```
+
+
+```python
+# __SOLUTION__
 word_counts = {}
 
 for word in words_cleaned:
@@ -238,6 +325,19 @@ Think about how you might accomplish this with a single loop, but don't worry if
 
 
 ```python
+# Your code here
+
+print("The most frequent word in Macbeth is '{}', which appears {} times".format(
+    most_frequent_word, word_counts[most_frequent_word]
+))
+print("The least frequent word in Macbeth is '{}', which appears {} times".format(
+    least_frequent_word, word_counts[least_frequent_word]
+))
+```
+
+
+```python
+# __SOLUTION__
 max_frequency = max(word_counts.values())
 min_frequency = min(word_counts.values())
 
@@ -276,6 +376,12 @@ Details:
 
 
 ```python
+# Your code here
+```
+
+
+```python
+# __SOLUTION__
 
 # Matplotlib version
 fig, ax = plt.subplots(figsize=(15,5))
@@ -287,12 +393,13 @@ ax.set_title("Word Frequency Distribution for Macbeth");
 
 
     
-![png](index_files/index_13_0.png)
+![png](index_files/index_21_0.png)
     
 
 
 
 ```python
+# __SOLUTION__
 
 # Technically you can use Seaborn also but it requires making
 # the figure and axes in Matplotlib first, otherwise you don't
@@ -313,7 +420,7 @@ sns.histplot(
 
 
     
-![png](index_files/index_14_0.png)
+![png](index_files/index_22_0.png)
     
 
 
@@ -327,6 +434,38 @@ For this task we are giving you even fewer hints than before. Check out the [Sor
 
 
 ```python
+# Replace None with appropriate code
+
+# This converts word_counts into a list of tuples,
+# similar to student_tuples
+counts_list = list(word_counts.items())
+
+# Sort the list of tuples by the frequency (second element in each tuple)
+# Make sure it goes from most to least frequent
+counts_list_sorted = None
+
+# Slice the sorted list to just the first 25 tuples
+top_25 = None
+
+# Make a list of dummy numbers to populate the axis with the words
+ticks = None
+
+# Get just the words from top_25 and assign to labels
+labels = None
+
+# Get just the frequencies from top_25 and assign to frequencies
+frequencies = None
+
+print("Tick values:", ticks)
+print()
+print("Labels:", labels)
+print()
+print("Frequencies:", frequencies)
+```
+
+
+```python
+# __SOLUTION__
 
 counts_list = list(word_counts.items())
 
@@ -381,6 +520,12 @@ Details:
 
 
 ```python
+# Your code here
+```
+
+
+```python
+# __SOLUTION__
 
 # Matplotlib version
 
@@ -406,12 +551,13 @@ ax.set_title("Top 25 Words in Macbeth");
 
 
     
-![png](index_files/index_18_0.png)
+![png](index_files/index_28_0.png)
     
 
 
 
 ```python
+# __SOLUTION__
 
 # Seaborn version
 
@@ -438,7 +584,7 @@ sns.barplot(
 
 
     
-![png](index_files/index_19_0.png)
+![png](index_files/index_29_0.png)
     
 
 
@@ -462,6 +608,11 @@ This cumulative lab should take you about an hour and a half to complete. If you
 * **Come up with some other fun analyses of the text!**
 
 There is no solution version of these level-up options. If you're having too much trouble, it's fine to move on without completing any of them!
+
+
+```python
+# Your code here
+```
 
 ## Summary
 Congratulations! You've got some extra practice combining various data types into useful programming patterns and done an initial analysis of a classic text!
